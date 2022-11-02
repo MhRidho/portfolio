@@ -1,8 +1,12 @@
 import React, { useState } from 'react'
-import { FiMenu, FiX, FiHome, FiUser, FiFile, FiLink, FiBook, FiPhone } from 'react-icons/fi';
-import { Link } from 'react-router-dom';
+import { FiMenu, FiX, FiHome, FiUser, FiFile, FiLink, FiBook, FiPhone, FiMessageSquare } from 'react-icons/fi';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Header = () => {
+  const navigate = useNavigate();
+  const chat = () => {
+    navigate('/join');
+  }
   const [isOpen, setIsOpen] = useState(false);
   const Menus = [
     { title: "Beranda", icon: <FiHome /> },
@@ -11,6 +15,7 @@ const Header = () => {
     { title: "Clients", icon: <FiLink /> },
     { title: "Blog", icon: <FiBook /> },
     { title: "Contact", icon: <FiPhone /> },
+    { title: "Chat", icon: <FiMessageSquare />, link: chat },
   ];
   return (
     <>
@@ -26,6 +31,7 @@ const Header = () => {
                 <ul className="pt-6">
                   {Menus.map((Menu, index) => (
                     <li
+                      onClick={Menu.link}
                       key={index}
                       className={`flex rounded-md p-2 cursor-pointer hover:bg-secondary text-gray-300 text-sm items-center gap-x-4 
               ${Menu.gap ? "mt-9" : "mt-2"} ${index === 0 && "bg-light-white"
